@@ -1,8 +1,4 @@
-# CNN Hardware Accelerator
 
-**Design and RTL-to-GDS implementation of a parameterized 2-D convolution engine using implicit Im2Col addressing and an output-stationary systolic PE chain.**
-
-<img width="1536" height="1024" alt="CNN Hardware Accelerator overview" src="https://github.com/user-attachments/assets/c7225bd0-34f8-4319-919c-d3b79b81288a" />
 
 **Tools:** SystemVerilog · Python/NumPy (reference model) · Cadence Genus (synthesis) · Cadence Innovus (place & route)
 
