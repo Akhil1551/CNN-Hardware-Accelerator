@@ -1,4 +1,4 @@
-<img width="512" height="512" alt="image" src="https://github.com/user-attachments/assets/9062a039-f6fd-4ffa-9abb-f69c30edf664" />
+<img width="1703" height="923" alt="image" src="https://github.com/user-attachments/assets/0630e090-5c93-4d01-a66d-41456876a522" />
 
 
 **Tools:** SystemVerilog · Python/NumPy (reference model) · Cadence Genus (synthesis) · Cadence Innovus (place & route)
