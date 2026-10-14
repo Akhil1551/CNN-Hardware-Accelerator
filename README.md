@@ -1,4 +1,4 @@
-## Convolutional Neaural Network Hardware Accelerator for 5*5 image with 3*3 kernel filter
+## Convolutional Neaural Network Hardware Accelerator for 5x5 image with 3x3 kernel filter
 <img width="1703" height="923" alt="image" src="https://github.com/user-attachments/assets/0630e090-5c93-4d01-a66d-41456876a522" />
 
 
