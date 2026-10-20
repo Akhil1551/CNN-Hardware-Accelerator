@@ -5,24 +5,25 @@ module output_buffer #(
     parameter int IMG_W      = 5,
     parameter int KERNEL_SZ  = 3,
     parameter int ACC_W      = 36,
-    parameter int ADDR_WIDTH = 8
+    parameter int ADDR_WIDTH = 8,
+    parameter bit EN_RELU    = 1'b1  // 1: Apply ReLU (clip negatives to 0), 0: Bypass ReLU
 )(
-    input  logic                     clk,
-    input  logic                     rst_n,
+    input  logic                    clk,
+    input  logic                    rst_n,
 
     // From systolic_array
-    input  logic                     acc_valid, // High when a PE outputs a finished sum
-    input  logic signed [ACC_W-1:0]  acc_in,    // Connected to systolic_array.acc_out
+    input  logic                    acc_valid, // High when a PE outputs a finished sum
+    input  logic signed [ACC_W-1:0] acc_in,    // Connected to systolic_array.acc_out
 
     // Optional Combinational Read Port (to inspect stored results externally)
-    input  logic [ADDR_WIDTH-1:0]    ofm_rd_row,
-    input  logic [ADDR_WIDTH-1:0]    ofm_rd_col,
-    output logic signed [ACC_W-1:0]  ofm_rd_data,
+    input  logic [ADDR_WIDTH-1:0]   ofm_rd_row,
+    input  logic [ADDR_WIDTH-1:0]   ofm_rd_col,
+    output logic signed [ACC_W-1:0] ofm_rd_data,
 
     // Status outputs
-    output logic [ADDR_WIDTH-1:0]    wr_row_mon, // Monitors current write row
-    output logic [ADDR_WIDTH-1:0]    wr_col_mon, // Monitors current write col
-    output logic                     ofm_done    // High when final (2,2) output is being written
+    output logic [ADDR_WIDTH-1:0]   wr_row_mon, // Monitors current write row
+    output logic [ADDR_WIDTH-1:0]   wr_col_mon, // Monitors current write col
+    output logic                    ofm_done    // High when final (2,2) output is being written
 );
 
     localparam int OUT_H = IMG_H - KERNEL_SZ + 1; // 5 - 3 + 1 = 3
@@ -35,6 +36,7 @@ module output_buffer #(
     logic [ADDR_WIDTH-1:0] wr_row;
     logic [ADDR_WIDTH-1:0] wr_col;
 
+    // Status assignments
     assign wr_row_mon = wr_row;
     assign wr_col_mon = wr_col;
     assign ofm_done   = acc_valid && (wr_row == ADDR_WIDTH'(OUT_H - 1)) && (wr_col == ADDR_WIDTH'(OUT_W - 1));
@@ -52,8 +54,9 @@ module output_buffer #(
                 end
             end
         end else if (acc_valid) begin
-            // 1. Store incoming accumulator sum at current (wr_row, wr_col)
-            out_mem[wr_row][wr_col] <= acc_in;
+            // 1. Store incoming accumulator sum at current (wr_row, wr_col) with ReLU check
+            // Checks MSB (sign bit) at index ACC_W-1: if negative and EN_RELU is high, store 0
+            out_mem[wr_row][wr_col] <= (EN_RELU && acc_in[ACC_W-1]) ? '0 : acc_in;
 
             // 2. Advance internal 2D write pointer for the next cycle
             if (wr_col == ADDR_WIDTH'(OUT_W - 1)) begin
@@ -73,7 +76,7 @@ module output_buffer #(
     // Combinational Read Port
     // -------------------------------------------------------------------------
     always_comb begin
-        if ((ofm_rd_row < OUT_H) && (ofm_rd_col < OUT_W))
+        if ((ofm_rd_row < ADDR_WIDTH'(OUT_H)) && (ofm_rd_col < ADDR_WIDTH'(OUT_W)))
             ofm_rd_data = out_mem[ofm_rd_row][ofm_rd_col];
         else
             ofm_rd_data = '0;
