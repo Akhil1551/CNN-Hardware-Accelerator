@@ -22,8 +22,8 @@ not all the time my inputs were correct but 70-80  percent of my inputs improved
 
 so Before you judge and say its AI any one can do it, Would like to tell you think positively
 
-##Credits to AI Tools
-1. Gemini 4(The best when you tell what that module tells and gives you the code, but it 
+## Credits to AI Tools
+1.Gemini 4(The best when you tell what that module tells and gives you the code, but it 
 will overcomplicate your project a little, try to understand the code and ask it to make the edits)
 
 2.Chat GPT (The Best Teacher)
