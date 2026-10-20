@@ -126,13 +126,13 @@ The Vivado schematics below are generated from the implemented RTL. The design h
 
 ### Vivado Schematic (1/2) – Control, Address Generation, Kernel Buffer
 
-![Vivado schematic part 1](docs/images/vivado_schematic_part1.jpg)
+![Vivado schematic part 1](docs/images/schp1.jpg)
 
 *Figure 1. Left half of the elaborated design. `u_ctrl` takes `start` and drives `en`, `first_load`, `start_row[7:0]`, `start_col[7:0]` and `k_load`. `u_addr_gen` produces `row_addr[0..8]`, `col_addr[0..8]`, `valid[8:0]` and `done[8:0]`. `u_kernel_buffer` has its own write port (`k_wr_*`) and returns `k_out`, `k_first`, and `k_done` (fed back to the controller). The image write port (`img_wr_*`) is routed to the image buffer on the right.*
 
 ### Vivado Schematic (2/2) – Image Buffer, Systolic Array, Output Buffer
 
-![Vivado schematic part 2](docs/images/vivado_schematic_part2.jpg)
+![Vivado schematic part 2](docs/images/schp2.jpg)
 
 *Figure 2. Right half of the elaborated design. The nine address pairs from `u_addr_gen` enter `u_img_buffer`, whose nine `pixel_out[0..8]` buses feed `pix_in[0..8]` of `u_systolic_array`. The array also receives `k_in`, `k_first`, `valid_in_0` (= `valid[0]`) and `done_in[8:0]`, and returns the serialized `acc_out[35:0]` / `acc_valid`. These drive `u_output_buffer` and the `acc_out_mon` / `acc_valid_mon` ports. `busy` and `conv_done` come from `u_ctrl`; `ofm_done` comes from `u_output_buffer`. The output buffer's read-address inputs (`ofm_rd_row`, `ofm_rd_col`) are tied to ground at the top level.*
 
