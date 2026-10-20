@@ -1,14 +1,13 @@
-###Before you Judge:
+## Before you Judge:
 
 
-Yes this project is made with the help of ##AI, i will not take all the credit,
-but one thing you have to understand is that how ##AI is used and helped me in this project,
+Yes this project is made with the help of AI, i will not take all the credit,
+but one thing you have to understand is that how AI is used and helped me in this project,
 Yes, it has written the code, it has written the readme file as well,
 
-##Then what did I DO?
+## Then what did I DO?
 One thing you have to remember is it has written all from the architecture
-i have provided, 
-##I read research papers, done ground work with Architectural or dataflow understanding this project is built with
+i have provided, I read research papers, done ground work with Architectural or dataflow understanding this project is built with
 AI helps you fast track the project
 like writing big codes, connecting wires between the instansiated block and stuff
 Bare one thing in mind, what ever project is done by AI is not absolute
