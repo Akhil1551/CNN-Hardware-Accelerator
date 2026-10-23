@@ -29,7 +29,12 @@ module cnn_top #(
     // Final Output Feature Map Monitoring Ports
     output logic signed [ACC_W-1:0]             acc_out_mon,
     output logic                                acc_valid_mon,
-    output logic                                ofm_done
+    output logic                                ofm_done,
+
+    // Output Feature Map Read Port (select an output location to read its value)
+    input  logic [ADDR_WIDTH-1:0]               ofm_rd_row,
+    input  logic [ADDR_WIDTH-1:0]               ofm_rd_col,
+    output logic signed [ACC_W-1:0]             ofm_rd_data
 );
 
     // Internal interconnect wires
@@ -53,7 +58,6 @@ module cnn_top #(
     logic                                       acc_valid;
     logic [ADDR_WIDTH-1:0]                      wr_row_mon;
     logic [ADDR_WIDTH-1:0]                      wr_col_mon;
-    logic signed [ACC_W-1:0]                    unused_rd_data;
 
     // Monitor assignments
     assign acc_out_mon   = acc_out;
@@ -165,9 +169,9 @@ module cnn_top #(
         .rst_n      (rst_n),
         .acc_valid  (acc_valid),
         .acc_in     (acc_out),
-        .ofm_rd_row ('0),
-        .ofm_rd_col ('0),
-        .ofm_rd_data(unused_rd_data),
+        .ofm_rd_row (ofm_rd_row),
+        .ofm_rd_col (ofm_rd_col),
+        .ofm_rd_data(ofm_rd_data),
         .wr_row_mon (wr_row_mon),
         .wr_col_mon (wr_col_mon),
         .ofm_done   (ofm_done)
