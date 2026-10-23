@@ -162,7 +162,7 @@ module tb_cnn_test_top;
         for (int s = 0; s < NUM_SETS; s++)
             run_set(s);
         $display("\nAll data sets done.");
-	        $finish;
+        $finish;
     end
 
 endmodule
