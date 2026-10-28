@@ -388,19 +388,19 @@ This requires pixel reuse (to keep read logic manageable) and a banked output me
 
 ## Implementation Results
 
-*To be completed after synthesis and place-and-route.*
+*Genus synthesis results are filled in below (see [`synthesis/`](synthesis/)); place-and-route is still to do.*
 
 | Metric | Synthesis (Genus) | Post-route (Innovus) |
 |--------|-------------------|----------------------|
-| Technology node | | |
-| Target clock period (ns) | | |
-| Achieved frequency (MHz) | | |
-| Worst setup slack (ns) | | |
+| Technology node | 90nm (`fast.lib`) | |
+| Target clock period (ns) | 10.0 | |
+| Achieved frequency (MHz) | 100 (target met) | |
+| Worst setup slack (ns) | +5.652 | |
 | Worst hold slack (ns) | — | |
-| Standard-cell area (µm²) | | |
-| Number of cells | | |
+| Standard-cell area (µm²) | 109,558 | |
+| Number of cells | 11,956 | |
 | Core utilization (%) | — | |
-| Total power (mW) | | |
+| Total power (mW) | 10.79 | |
 | DRC violations | — | |
 | LVS result | — | |
 
